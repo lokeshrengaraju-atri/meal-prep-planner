@@ -1,0 +1,68 @@
+// const DATA = [
+//   {
+//     id: 1,
+//     mealName: "Scrambled Eggs & Toast",
+//     dayOfWeek: "Monday",
+//     ingredients: "Eggs, Bread, Butter, Salt",
+//     preparedStatus: "Not Prepared",
+//     instruction: "Whisk eggs, cook in a pan, serve with toasted bread.",
+//   },
+//   {
+//     id: 2,
+//     mealName: "Spaghetti Bolognese",
+//     dayOfWeek: "Tuesday",
+//     ingredients: "Spaghetti, Ground Beef, Tomato Sauce, Garlic",
+//     preparedStatus: "Prepared",
+//     instruction: "Cook spaghetti, prepare sauce with beef, mix together.",
+//   },
+//   {
+//     id: 3,
+//     mealName: "Grilled Chicken Salad",
+//     dayOfWeek: "Wednesday",
+//     ingredients: "Chicken, Lettuce, Tomatoes, Dressing",
+//     preparedStatus: "Not Prepared",
+//     instruction: "Grill chicken, chop veggies, mix with dressing.",
+//   },
+//   {
+//     id: 4,
+//     mealName: "Vegetable Stir Fry",
+//     dayOfWeek: "Thursday",
+//     ingredients: "Broccoli, Bell Peppers, Carrots, Soy Sauce, Rice",
+//     preparedStatus: "Prepared",
+//     instruction: "Stir-fry vegetables, add soy sauce, serve with rice.",
+//   },
+//   {
+//     id: 5,
+//     mealName: "Beef Tacos",
+//     dayOfWeek: "Friday",
+//     ingredients: "Ground Beef, Tortilla, Cheese, Lettuce, Salsa",
+//     preparedStatus: "Not Prepared",
+//     instruction: "Cook beef, assemble tacos with toppings, serve.",
+//   },
+//   {
+//     id: 6,
+//     mealName: "Baked Salmon & Asparagus",
+//     dayOfWeek: "Saturday",
+//     ingredients: "Salmon, Asparagus, Lemon, Garlic, Olive Oil",
+//     preparedStatus: "Prepared",
+//     instruction: "Season salmon, bake with asparagus, serve with lemon.",
+//   },
+//   {
+//     id: 7,
+//     mealName: "Homemade Pizza",
+//     dayOfWeek: "Sunday",
+//     ingredients: "Pizza Dough, Tomato Sauce, Cheese, Pepperoni, Olives",
+//     preparedStatus: "Not Prepared",
+//     instruction: "Roll dough, add toppings, bake in oven.",
+//   },
+//   {
+//     id: 8,
+//     mealName: "Chicken Soup",
+//     dayOfWeek: "Monday",
+//     ingredients: "Chicken, Carrots, Celery, Onion, Broth, Noodles",
+//     preparedStatus: "Prepared",
+//     instruction: "Simmer chicken and veggies, add noodles, serve warm.",
+//   },
+// ];
+
+// export default DATA;

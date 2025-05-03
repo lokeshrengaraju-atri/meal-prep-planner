@@ -1,0 +1,101 @@
+/* General Styles */
+html {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(179, 214, 179);
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+button {
+  background-color: rgb(119, 120, 101) !important;
+  color: white !important;
+}
+
+/* Table Wrapper */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers table & filter */
+  width: 100%;
+  margin-top: 2%;
+}
+
+.page-container {
+  background-color: rgb(179, 214, 179);
+}
+/* Filter Container (Ensuring Proper Positioning) */
+.filter-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 5rem;
+  display: flex;
+  margin-left: 20%;
+  gap: 61%;
+}
+
+/* Table Styling */
+table {
+  background-color: rgb(179, 214, 179);
+  max-width: 800px;
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid rgb(37, 36, 36);
+  background-color: #f8f9fa;
+
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden;
+}
+
+/* Table Head */
+thead {
+  background-color: rgb(249, 203, 203);
+}
+
+th,
+td {
+  border: 1px solid rgb(28, 24, 24);
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Alternating Row Colors */
+tbody tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+/* Highlight Prepared & Not Prepared Meals */
+.prepared {
+  background-color: #55f18970 !important; /* Light green for prepared meals */
+  font-weight: bold;
+}
+
+.not-prepared {
+  background-color: rgb(
+    236,
+    116,
+    116
+  ) !important; /* Red for unprepared meals */
+}
+
+/* Footer Styling */
+tfoot {
+  color: gray;
+  background-color: #ddd;
+}
+
+tfoot th {
+  font-weight: normal;
+  padding: 8px;
+}
+
+/* Improve Text Wrapping */
+td {
+  white-space: nowrap;
+}
