@@ -1,17 +1,22 @@
 import { Button, Input, InputGroup } from "reactstrap";
 
-const FoodSearch = ({ columnFilters, setColumnFilters }) => {
-  //   const foodName = columnFilters.find((f) => f.id === "mealName")?.value || "";
+interface FoodSearchProps {
+  columnFilters: { id: string; value: string[] }[];
+  setColumnFilters: (filters: { id: string; value: string[] }[]) => void;
+}
+
+const FoodSearch: React.FC<FoodSearchProps> = ({
+  columnFilters,
+  setColumnFilters,
+}) => {
   const foodName = columnFilters?.find((f) => f.id === "mealName")?.value || "";
 
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setColumnFilters(
-      value ? [{ id: "mealName", value }] : [] // Clear filter when input is empty
-    );
+    setColumnFilters(value ? [{ id: "mealName", value: [value] }] : []);
   };
   const handleReset = () => {
-    setColumnFilters([]); // ✅ Clears filters properly
+    setColumnFilters([]);
   };
 
   return (

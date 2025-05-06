@@ -21,7 +21,9 @@ const App = () => {
         <Route path="/" element={<MealTable />} /> {/* Default homepage */}
         <Route
           path="/add-meal"
-          element={<AddMeal onAddMeal={() => console.log("Meal Added!")} />}
+          element={
+            <AddMeal fetchUpdatedMeals={() => console.log("Meal Added!")} />
+          }
         />
       </Routes>
     </Router>

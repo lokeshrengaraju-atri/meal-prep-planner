@@ -1,19 +1,33 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Popover, PopoverBody } from "reactstrap";
 
-const FilterPopover = ({ columnFilters, setColumnFilters }) => {
+interface FilterPopoverProps {
+  columnFilters: { id: string; value: string[] }[];
+  setColumnFilters: React.Dispatch<
+    React.SetStateAction<{ id: string; value: string[] }[]>
+  >;
+}
+
+const FilterPopover: React.FC<FilterPopoverProps> = ({
+  columnFilters,
+  setColumnFilters,
+}) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const [statusOptions, setStatusOptions] = useState([]); // ✅ Fetch dynamic statuses
+  const [statusOptions, setStatusOptions] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/meals") // ✅ Fetch meals from JSON Server
+    fetch("http://localhost:5000/meals")
       .then((res) => res.json())
       .then((data) => {
+        interface Meal {
+          preparedStatus: string;
+        }
+
         const uniqueStatuses = Array.from(
-          new Set(data.map((meal) => meal.preparedStatus))
+          new Set((data as Meal[]).map((meal) => meal.preparedStatus))
         );
 
-        const validStatuses = ["Prepared", "Not Prepared"]; // ✅ Restrict to valid statuses
+        const validStatuses = ["Prepared", "Not Prepared"];
         const filteredStatuses = uniqueStatuses.filter((status) =>
           validStatuses.includes(status)
         );
@@ -25,7 +39,7 @@ const FilterPopover = ({ columnFilters, setColumnFilters }) => {
 
   const togglePopover = () => setPopoverOpen(!popoverOpen);
 
-  const handleFilterClick = (status) => {
+  const handleFilterClick = (status: string): void => {
     if (status === "All") {
       setColumnFilters([
         { id: "preparedStatus", value: ["Prepared", "Not Prepared"] },

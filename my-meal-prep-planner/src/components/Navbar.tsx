@@ -6,6 +6,7 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import AddMeal from "./Addmeal";
 
 const MyNavbar = () => {
   return (
@@ -23,7 +24,12 @@ const MyNavbar = () => {
             <NavLink href="/search">Search & Filter</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/add-meal">Add Meal</NavLink>
+            <NavLink
+              href="/add-meal"
+              element={<AddMeal fetchUpdatedMeals={() => {}} />}
+            >
+              Add Meal
+            </NavLink>
           </NavItem>
         </Nav>
       </Container>

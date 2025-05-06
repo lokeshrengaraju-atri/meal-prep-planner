@@ -1,0 +1,68 @@
+{
+  "meals": [
+    {
+      "id": "1",
+      "mealName": "Scrambled Eggs & Toast",
+      "dayOfWeek": "Monday",
+      "ingredients": "Eggs, Bread, Butter, Salt",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Whisk eggs, cook in a pan, add chill "
+    },
+    {
+      "id": "2",
+      "mealName": "Spaghetti Bolognese",
+      "dayOfWeek": "Tuesday",
+      "ingredients": "Spaghetti, Ground Beef, Tomato Sauce, Garlic",
+      "preparedStatus": "Prepared",
+      "instruction": "Cook spaghetti, prepare sauce with beef,"
+    },
+    {
+      "id": "3",
+      "mealName": "Grilled Chicken Salad",
+      "dayOfWeek": "Wednesday",
+      "ingredients": "Chicken, Lettuce, Tomatoes, Dressing",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Grill chicken, chop veggies, mix with dressing."
+    },
+    {
+      "id": "4",
+      "mealName": "Vegetable Stir Fry",
+      "dayOfWeek": "Thursday",
+      "ingredients": "Broccoli, Bell Peppers, Carrots, Soy Sauce, Rice",
+      "preparedStatus": "Prepared",
+      "instruction": "Stir-fry  add vegetable and cook it"
+    },
+    {
+      "id": "5",
+      "mealName": "Beef Tacos",
+      "dayOfWeek": "Saturday",
+      "ingredients": "Ground Beef, Taco Shells, Cheese, Lettuce, Tomato",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Cook beef, add seasoning, and serve in taco shells."
+    },
+    {
+      "id": "6",
+      "mealName": "Chicken Alfredo",
+      "dayOfWeek": "Sunday",
+      "ingredients": "Chicken Breast, Pasta, Cream, Parmesan Cheese, Garlic",
+      "preparedStatus": "Prepared",
+      "instruction": "Cook chicken, boil pasta, and mix with Alfredo sauce."
+    },
+    {
+      "id": "7",
+      "mealName": "Baked Salmon",
+      "dayOfWeek": "Monday",
+      "ingredients": "Salmon Fillet, Lemon, Garlic, Butter, Asparagus",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Season salmon, bake at 375°F, and serve with asparagus."
+    },
+    {
+      "id": "8",
+      "mealName": "Mushroom Risotto",
+      "dayOfWeek": "Tuesday",
+      "ingredients": "Arborio Rice, Mushrooms, Parmesan, Garlic, Chicken Broth",
+      "preparedStatus": "Prepared",
+      "instruction": "Cook rice slowly with broth, add mushrooms and cheese."
+    }
+  ]
+}
