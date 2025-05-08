@@ -1,106 +1,86 @@
-import axios from "axios"; // Importing axios
-import { useEffect, useState } from "react";
-import EditMealModal from "./EditMeal";
-import FoodSearch from "./FilterName";
-import FilterPopover from "./FilterPopover";
-
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-type Meal = {
-  id: number;
-  mealName: string;
-  dayOfWeek: string;
-  ingredients: string;
-  preparedStatus: string;
-  instruction: string;
-};
+import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Container,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Table,
+} from "reactstrap";
+import { Meal } from "../hooks/useMeal";
 
 const columnHelper = createColumnHelper<Meal>();
 
-const MealTable = () => {
-  const [data, setData] = useState<Meal[]>([]);
-  const [filteredData, setFilteredData] = useState<Meal[]>([]);
-  const [columnFilters, setColumnFilters] = useState<
-    { id: string; value: string[] }[]
-  >([]);
-  const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
+interface MealTableProps {
+  filteredData: Meal[];
+  columnFilters: { id: string; value: string[] }[];
+  fetchUpdatedMeals: () => Promise<void>;
+}
 
-  // Function to fetch updated meals using axios
-  const fetchUpdatedMeals = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/meals");
-      setData(response.data);
-      setFilteredData(response.data);
-    } catch (error) {
-      console.error("Error fetching meals:", error);
+const MealTable: React.FC<MealTableProps> = ({
+  filteredData,
+  columnFilters,
+  fetchUpdatedMeals,
+}) => {
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mealToDelete, setMealToDelete] = useState<Meal | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const mealsPerPage = 8;
+
+  // Calculate total pages
+  const totalPages = useMemo(
+    () => Math.ceil(filteredData.length / mealsPerPage),
+    [filteredData.length, mealsPerPage]
+  );
+
+  // Get paginated data
+  const currentMeals = useMemo(() => {
+    const indexOfLastMeal = currentPage * mealsPerPage;
+    const indexOfFirstMeal = indexOfLastMeal - mealsPerPage;
+    return filteredData.slice(indexOfFirstMeal, indexOfLastMeal);
+  }, [filteredData, currentPage, mealsPerPage]);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+  const handleDelete = async () => {
+    if (mealToDelete) {
+      try {
+        await fetch(`http://localhost:5000/meals/${mealToDelete.id}`, {
+          method: "DELETE",
+        });
+        await fetchUpdatedMeals(); // Refresh the table after deletion
+        toggleModal(); // Close the modal
+      } catch (error) {
+        console.error("Error deleting meal:", error);
+      }
     }
-  };
-
-  useEffect(() => {
-    fetchUpdatedMeals();
-  }, []);
-
-  useEffect(() => {
-    const nameFilter =
-      columnFilters.find((f) => f.id === "mealName")?.value[0] || "";
-    const statusFilter =
-      columnFilters.find((f) => f.id === "preparedStatus")?.value || [];
-
-    const newFilteredData = data.filter((meal) => {
-      return (
-        (!nameFilter ||
-          meal.mealName?.toLowerCase().includes(nameFilter.toLowerCase())) &&
-        (statusFilter.length === 0 ||
-          statusFilter.includes(meal.preparedStatus))
-      );
-    });
-
-    setFilteredData(newFilteredData);
-  }, [columnFilters, data]);
-
-  const handleEdit = (meal: Meal) => {
-    console.log("Edit clicked for ", meal);
-    setSelectedMeal(meal);
-    setEditModalOpen(true);
-  };
-
-  const handleDelete = async (id: number) => {
-    try {
-      // Sending delete request using axios
-      await axios.delete(`http://localhost:5000/meals/${id}`);
-      fetchUpdatedMeals(); // Refresh the meal list after deletion
-    } catch (error) {
-      console.error("Error deleting meal:", error);
-    }
-  };
-
-  const handleSave = () => {
-    setEditModalOpen(false);
-    setSelectedMeal(null);
-    fetchUpdatedMeals();
   };
 
   const columns = [
     columnHelper.accessor("id", {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>ID</span>,
-      size: 50,
     }),
     columnHelper.accessor("mealName", {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Meal Name</span>,
-      size: 250,
     }),
     columnHelper.accessor("dayOfWeek", {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Day of the Week</span>,
-      size: 150,
     }),
     columnHelper.accessor("ingredients", {
       header: () => <span>Ingredients</span>,
@@ -120,16 +100,25 @@ const MealTable = () => {
       cell: ({ row }) => {
         const meal = row.original;
         return (
-          <div className="flex gap-2">
-            <button className="edit-btn" onClick={() => handleEdit(meal)}>
+          <div className="d-flex gap-2">
+            <Button
+              id="edit"
+              color="primary"
+              size="sm"
+              onClick={() => navigate(`/${meal.id}`)}
+            >
               Edit
-            </button>
-            <button
-              className="delete-btn"
-              onClick={() => handleDelete(meal.id)}
+            </Button>
+            <Button
+              color="danger"
+              size="sm"
+              onClick={() => {
+                setMealToDelete(meal);
+                toggleModal();
+              }}
             >
               Delete
-            </button>
+            </Button>
           </div>
         );
       },
@@ -137,73 +126,95 @@ const MealTable = () => {
   ];
 
   const table = useReactTable({
-    data: filteredData,
+    data: currentMeals, // Use paginated data
     columns,
     getCoreRowModel: getCoreRowModel(),
     state: { columnFilters },
   });
 
   return (
-    <div className="page-container">
-      <div className="table-container">
-        <div className="filter-container">
-          <FoodSearch
-            columnFilters={columnFilters}
-            setColumnFilters={setColumnFilters}
-          />
-          <FilterPopover
-            columnFilters={columnFilters}
-            setColumnFilters={setColumnFilters}
-          />
-        </div>
+    <Container>
+      <Table bordered hover responsive>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr
+              key={row.id}
+              className={
+                row.original.preparedStatus === "Prepared"
+                  ? "prepared"
+                  : "not-prepared"
+              }
+            >
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
 
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr
-                key={row.id}
-                className={
-                  row.original.preparedStatus === "Prepared"
-                    ? "prepared"
-                    : "not-prepared"
-                }
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Pagination Controls */}
+      <div className="pagination-controls d-flex justify-content-center mt-3">
+        <Button
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          Prev
+        </Button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <Button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            style={{
+              fontWeight: currentPage === index + 1 ? "bold" : "normal",
+              margin: "0 5px",
+            }}
+          >
+            {index + 1}
+          </Button>
+        ))}
+        <Button
+          disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          Next
+        </Button>
       </div>
 
-      {isEditModalOpen && selectedMeal && (
-        <EditMealModal
-          isOpen={isEditModalOpen}
-          onClose={() => setEditModalOpen(false)}
-          meal={selectedMeal}
-          onSave={handleSave}
-        />
-      )}
-    </div>
+      <Modal isOpen={isModalOpen} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Confirm Deletion</ModalHeader>
+        <ModalBody>
+          Are you sure you want to delete the meal "
+          <strong>{mealToDelete?.mealName}</strong>"?
+        </ModalBody>
+        <ModalFooter>
+          <Button color="danger" onClick={handleDelete}>
+            Yes, Delete
+          </Button>
+          <Button color="secondary" onClick={toggleModal}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </Container>
   );
 };
 

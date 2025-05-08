@@ -1,32 +1,23 @@
-// import "./App.css";
-// import MealTable from "./components/MealTable";
-
-// function App() {
-//   return <MealTable />;
-// }
-
-// export default App;
-
+import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import AddMeal from "./components/Addmeal";
-import MealTable from "./components/MealTable";
-import MyNavbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
+import AddMealPage from "./pages/AddMealPage";
+import EditMealPage from "./pages/EditMealPage";
+import HomePage from "./pages/HomePage";
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <Router>
-      <MyNavbar />
-      <Routes>
-        <Route path="/" element={<MealTable />} /> {/* Default homepage */}
-        <Route
-          path="/add-meal"
-          element={
-            <AddMeal fetchUpdatedMeals={() => console.log("Meal Added!")} />
-          }
-        />
-      </Routes>
-    </Router>
+    <div className="background">
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/add-meal" element={<AddMealPage />} />
+          <Route path="/:mealId" element={<EditMealPage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

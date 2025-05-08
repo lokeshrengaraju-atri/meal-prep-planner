@@ -1,16 +1,20 @@
+import axios from "axios";
+import React from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
-  Col,
   Container,
   Form,
+  FormFeedback,
   FormGroup,
   Input,
   Label,
-  Row,
 } from "reactstrap";
+import { useMeal } from "../hooks/useMeal";
 
-type MealFormData = {
+type Meal = {
+  id?: number;
   mealName: string;
   dayOfWeek: string;
   ingredients: string;
@@ -18,171 +22,159 @@ type MealFormData = {
   instruction: string;
 };
 
-type AddMealProps = {
-  fetchUpdatedMeals?: () => void;
-};
-
-const AddMeal: React.FC<AddMealProps> = ({ fetchUpdatedMeals }) => {
+const AddMeal: React.FC = () => {
+  const { fetchUpdatedMeals } = useMeal();
+  const navigate = useNavigate();
   const {
-    handleSubmit,
     control,
+    handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<MealFormData>({
+  } = useForm<Meal>({
     defaultValues: {
       mealName: "",
       dayOfWeek: "",
       ingredients: "",
-      preparedStatus: "Not Prepared",
+      preparedStatus: "Prepared",
       instruction: "",
     },
   });
 
-  const onSubmit: SubmitHandler<MealFormData> = async (data) => {
+  const onSubmit: SubmitHandler<Meal> = async (data) => {
     try {
-      const response = await fetch("http://localhost:5000/meals");
-      const meals = await response.json();
-
-      interface Meal {
-        id: string;
-        mealName: string;
-        dayOfWeek: string;
-        ingredients: string;
-        preparedStatus: string;
-        instruction: string;
-      }
-
-      const newId =
+      const response = await axios.get<Meal[]>("http://localhost:5000/meals");
+      const meals = response.data;
+      const nextId =
         meals.length > 0
-          ? Math.max(
-              ...(meals.map((meal: Meal) => Number(meal.id)) + 1)
-            ).toString()
+          ? (Math.max(...meals.map((meal) => Number(meal.id))) + 1).toString()
           : "1";
-
-      const mealToSend = { id: newId, ...data };
-      console.log("Final Meal Data to Server:", mealToSend);
-
-      await fetch("http://localhost:5000/meals", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(mealToSend),
-      });
-
+      const newMeal = { id: nextId, ...data };
+      await axios.post("http://localhost:5000/meals", newMeal);
+      fetchUpdatedMeals();
       reset();
-      if (fetchUpdatedMeals) {
-        fetchUpdatedMeals();
-      }
+      navigate("/");
     } catch (error) {
-      console.error("Error adding meal:", error);
+      console.error("Failed to add meal:", error);
     }
+  };
+  const handleCancel = () => {
+    navigate("/");
   };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center min-vh-100">
-      <Row className="w-100 justify-content-center">
-        <Col md={6}>
-          <h2 className="text-center mb-4">Add New Meal</h2>
-          <Form
-            onSubmit={handleSubmit(onSubmit)}
-            className="border p-4 shadow rounded bg-light"
-          >
-            <FormGroup>
-              <Label>Meal Name</Label>
-              <Controller
-                name="mealName"
-                control={control}
-                rules={{ required: true, minLength: 2 }}
-                render={({ field }) => <Input type="text" {...field} />}
+    <Container>
+      <h1>Add a New Meal</h1>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <FormGroup>
+          <Label for="mealName">Meal Name</Label>
+          <Controller
+            name="mealName"
+            control={control}
+            rules={{ required: "Meal name is required" }}
+            render={({ field }) => (
+              <Input id="mealName" {...field} invalid={!!errors.mealName} />
+            )}
+          />
+          {errors.mealName && (
+            <FormFeedback>{errors.mealName.message}</FormFeedback>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <Label for="dayOfWeek">Day of the Week</Label>
+          <Controller
+            name="dayOfWeek"
+            control={control}
+            rules={{ required: "Day of the week is required" }}
+            render={({ field }) => (
+              <Input
+                type="select" // Change input type to "select"
+                id="dayOfWeek"
+                {...field}
+                invalid={!!errors.dayOfWeek}
+              >
+                <option value="">Select a day</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </Input>
+            )}
+          />
+          {errors.dayOfWeek && (
+            <FormFeedback>{errors.dayOfWeek.message}</FormFeedback>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <Label for="ingredients">Ingredients</Label>
+          <Controller
+            name="ingredients"
+            control={control}
+            rules={{ required: "Ingredients are required" }}
+            render={({ field }) => (
+              <Input
+                id="ingredients"
+                {...field}
+                invalid={!!errors.ingredients}
               />
-              {errors.mealName && (
-                <span className="text-danger">
-                  Minimum 2 characters required
-                </span>
-              )}
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Day of the Week</Label>
-              <Controller
-                name="dayOfWeek"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <Input type="select" {...field}>
-                    <option value="">Select Day</option>
-                    {[
-                      "Monday",
-                      "Tuesday",
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday",
-                      "Sunday",
-                    ].map((day) => (
-                      <option key={day} value={day}>
-                        {day}
-                      </option>
-                    ))}
-                  </Input>
-                )}
+            )}
+          />
+          {errors.ingredients && (
+            <FormFeedback>{errors.ingredients.message}</FormFeedback>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <Label for="preparedStatus">Prepared Status</Label>
+          <Controller
+            name="preparedStatus"
+            control={control}
+            rules={{ required: "Prepared status is required" }}
+            render={({ field }) => (
+              <Input
+                type="select"
+                id="preparedStatus"
+                {...field}
+                invalid={!!errors.preparedStatus}
+              >
+                <option value="Prepared">Prepared</option>
+                <option value="Not Prepared">Not Prepared</option>
+              </Input>
+            )}
+          />
+          {errors.preparedStatus && (
+            <FormFeedback>{errors.preparedStatus.message}</FormFeedback>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <Label for="instruction">Instruction</Label>
+          <Controller
+            name="instruction"
+            control={control}
+            rules={{ required: "Instruction is required" }}
+            render={({ field }) => (
+              <Input
+                type="textarea"
+                id="instruction"
+                {...field}
+                invalid={!!errors.instruction}
               />
-              {errors.dayOfWeek && (
-                <span className="text-danger">Please select a valid day</span>
-              )}
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Ingredients</Label>
-              <Controller
-                name="ingredients"
-                control={control}
-                rules={{ required: true, minLength: 5 }}
-                render={({ field }) => <Input type="text" {...field} />}
-              />
-              {errors.ingredients && (
-                <span className="text-danger">
-                  Minimum 5 characters required
-                </span>
-              )}
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Prepared Status</Label>
-              <Controller
-                name="preparedStatus"
-                control={control}
-                render={({ field }) => (
-                  <Input type="select" {...field}>
-                    <option value="Prepared">Prepared</option>
-                    <option value="Not Prepared">Not Prepared</option>
-                  </Input>
-                )}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Instruction</Label>
-              <Controller
-                name="instruction"
-                control={control}
-                rules={{ required: true, minLength: 5 }}
-                render={({ field }) => <Input type="textarea" {...field} />}
-              />
-              {errors.instruction && (
-                <span className="text-danger">
-                  Minimum 5 characters required
-                </span>
-              )}
-            </FormGroup>
-
-            <div className="text-center">
-              <Button color="primary" type="submit">
-                Add Meal
-              </Button>
-            </div>
-          </Form>
-        </Col>
-      </Row>
+            )}
+          />
+          {errors.instruction && (
+            <FormFeedback>{errors.instruction.message}</FormFeedback>
+          )}
+        </FormGroup>
+        <div className="d-flex justify-content-between">
+          <Button color="primary" type="submit">
+            Add Meal
+          </Button>
+          <Button color="secondary" type="button" onClick={handleCancel}>
+            Cancel
+          </Button>
+        </div>
+      </Form>
     </Container>
   );
 };

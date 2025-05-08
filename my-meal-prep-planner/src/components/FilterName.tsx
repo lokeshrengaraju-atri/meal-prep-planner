@@ -1,39 +1,39 @@
-import { Button, Input, InputGroup } from "reactstrap";
+import React from "react";
 
-interface FoodSearchProps {
+interface FilterNameProps {
   columnFilters: { id: string; value: string[] }[];
-  setColumnFilters: (filters: { id: string; value: string[] }[]) => void;
+  setColumnFilters: React.Dispatch<
+    React.SetStateAction<{ id: string; value: string[] }[]>
+  >;
 }
 
-const FoodSearch: React.FC<FoodSearchProps> = ({
+const FilterName: React.FC<FilterNameProps> = ({
   columnFilters,
   setColumnFilters,
 }) => {
-  const foodName = columnFilters?.find((f) => f.id === "mealName")?.value || "";
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setColumnFilters((prevFilters) => {
+      const otherFilters = prevFilters.filter(
+        (filter) => filter.id !== "mealName"
+      );
+      return value
+        ? [...otherFilters, { id: "mealName", value: [value] }]
+        : otherFilters;
+    });
+  };
 
-  const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setColumnFilters(value ? [{ id: "mealName", value: [value] }] : []);
-  };
-  const handleReset = () => {
-    setColumnFilters([]);
-  };
+  const currentFilter =
+    columnFilters.find((filter) => filter.id === "mealName")?.value[0] || "";
 
   return (
-    <div className="search-container">
-      <InputGroup className="mb-3" style={{ maxWidth: "300px" }}>
-        <Input
-          type="text"
-          placeholder="Search food by name..."
-          value={foodName}
-          onChange={onFilterChange}
-        />
-        <Button color="danger" onClick={handleReset}>
-          Reset
-        </Button>
-      </InputGroup>
-    </div>
+    <input
+      type="text"
+      placeholder="Filter by name"
+      value={currentFilter}
+      onChange={handleChange}
+    />
   );
 };
 
-export default FoodSearch;
+export default FilterName;

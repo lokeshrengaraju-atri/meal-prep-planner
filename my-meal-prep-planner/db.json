@@ -6,7 +6,7 @@
       "dayOfWeek": "Monday",
       "ingredients": "Eggs, Bread, Butter, Salt",
       "preparedStatus": "Not Prepared",
-      "instruction": "Whisk eggs, cook in a pan, add chill "
+      "instruction": "Whisk eggs, cook in a pan,  add salt and pepper"
     },
     {
       "id": "2",
@@ -14,7 +14,7 @@
       "dayOfWeek": "Tuesday",
       "ingredients": "Spaghetti, Ground Beef, Tomato Sauce, Garlic",
       "preparedStatus": "Prepared",
-      "instruction": "Cook spaghetti, prepare sauce with beef,"
+      "instruction": "Cook spaghetti, prepare sauce with"
     },
     {
       "id": "3",
@@ -30,23 +30,15 @@
       "dayOfWeek": "Thursday",
       "ingredients": "Broccoli, Bell Peppers, Carrots, Soy Sauce, Rice",
       "preparedStatus": "Prepared",
-      "instruction": "Stir-fry  add vegetable and cook it"
+      "instruction": "Stir-fry  add vegetable and cook it with egg"
     },
     {
       "id": "5",
       "mealName": "Beef Tacos",
       "dayOfWeek": "Saturday",
-      "ingredients": "Ground Beef, Taco Shells, Cheese, Lettuce, Tomato",
+      "ingredients": "Ground Beef, Taco Shells, Cheese",
       "preparedStatus": "Not Prepared",
       "instruction": "Cook beef, add seasoning, and serve in taco shells."
-    },
-    {
-      "id": "6",
-      "mealName": "Chicken Alfredo",
-      "dayOfWeek": "Sunday",
-      "ingredients": "Chicken Breast, Pasta, Cream, Parmesan Cheese, Garlic",
-      "preparedStatus": "Prepared",
-      "instruction": "Cook chicken, boil pasta, and mix with Alfredo sauce."
     },
     {
       "id": "7",
@@ -54,15 +46,119 @@
       "dayOfWeek": "Monday",
       "ingredients": "Salmon Fillet, Lemon, Garlic, Butter, Asparagus",
       "preparedStatus": "Not Prepared",
-      "instruction": "Season salmon, bake at 375°F, and serve with asparagus."
+      "instruction": "Season salmon, bake at 375°F, and serve with egg"
     },
     {
       "id": "8",
-      "mealName": "Mushroom Risotto",
-      "dayOfWeek": "Tuesday",
-      "ingredients": "Arborio Rice, Mushrooms, Parmesan, Garlic, Chicken Broth",
+      "mealName": "Butter Chicken",
+      "dayOfWeek": "Saturday",
+      "ingredients": "Chicken, Tomato, Butter, Cream, Spices",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Simmer chicken in tomato-butter sauce and serve with rice."
+    },
+    {
+      "id": "9",
+      "mealName": "Shrimp Tacos",
+      "dayOfWeek": "Sunday",
+      "ingredients": "Shrimp, Taco Shells, Cabbage, Lime, Avocado",
       "preparedStatus": "Prepared",
-      "instruction": "Cook rice slowly with broth, add mushrooms and cheese."
+      "instruction": "Cook shrimp, assemble tacos with fresh toppings."
+    },
+    {
+      "id": "10",
+      "mealName": "Eggplant Parmesan",
+      "dayOfWeek": "Monday",
+      "ingredients": "Eggplant, Tomato Sauce, Mozzarella, Basil, Bread Crumbs",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Layer eggplant with cheese and sauce, then bake."
+    },
+    {
+      "id": "11",
+      "mealName": "Korean Bibimbap",
+      "dayOfWeek": "Tuesday",
+      "ingredients": "Rice, Beef, Carrots, Spinach, Egg, Gochujang",
+      "preparedStatus": "Prepared",
+      "instruction": "Arrange ingredients over rice, top with egg and sauce."
+    },
+    {
+      "id": "12",
+      "mealName": "Falafel Wrap",
+      "dayOfWeek": "Wednesday",
+      "ingredients": "Falafel, Pita Bread, Hummus, Cucumber, Tomato",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Wrap crispy falafel with fresh veggies and hummus."
+    },
+    {
+      "id": "13",
+      "mealName": "Butter Chicken",
+      "dayOfWeek": "Saturday",
+      "ingredients": "Chicken, Tomato, Butter, Cream, Spices",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Simmer chicken in tomato-butter sauce and serve with rice."
+    },
+    {
+      "id": "14",
+      "mealName": "Shrimp Tacos",
+      "dayOfWeek": "Sunday",
+      "ingredients": "Shrimp, Taco Shells, Cabbage, Lime, Avocado",
+      "preparedStatus": "Prepared",
+      "instruction": "Cook shrimp, assemble tacos with fresh toppings."
+    },
+    {
+      "id": "15",
+      "mealName": "Eggplant Parmesan",
+      "dayOfWeek": "Monday",
+      "ingredients": "Eggplant, Tomato Sauce, Mozzarella, Basil, Bread Crumbs",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Layer eggplant with cheese and sauce, then bake."
+    },
+    {
+      "id": "16",
+      "mealName": "Korean Bibimbap",
+      "dayOfWeek": "Tuesday",
+      "ingredients": "Rice, Beef, Carrots, Spinach, Egg, Gochujang",
+      "preparedStatus": "Prepared",
+      "instruction": "Arrange ingredients over rice, top with egg and sauce."
+    },
+    {
+      "id": "17",
+      "mealName": "Falafel Wrap",
+      "dayOfWeek": "Wednesday",
+      "ingredients": "Falafel, Pita Bread, Hummus, Cucumber, Tomato",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Wrap crispy falafel with fresh veggies and hummus."
+    },
+    {
+      "id": "18",
+      "mealName": "Vegetable Pad Thai",
+      "dayOfWeek": "Thursday",
+      "ingredients": "Rice Noodles, Peanut Sauce, Tofu, Bean Sprouts, Lime",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Cook noodles, stir-fry with vegetables and sauce."
+    },
+    {
+      "id": "19",
+      "mealName": "Beef Stroganoff",
+      "dayOfWeek": "Friday",
+      "ingredients": "Beef, Mushrooms, Sour Cream, Onion, Egg Noodles",
+      "preparedStatus": "Prepared",
+      "instruction": "Simmer beef with mushrooms in creamy sauce, serve with noodles."
+    },
+    {
+      "id": "20",
+      "mealName": "Vegan Chickpea Curry",
+      "dayOfWeek": "Saturday",
+      "ingredients": "Chickpeas, Coconut Milk, Onion, Garlic, Curry Powder",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Simmer chickpeas in coconut curry sauce."
+    },
+    {
+      "id": "21",
+      "mealName": "Stuffed Portobello Mushrooms",
+      "dayOfWeek": "Sunday",
+      "ingredients": "Portobello Mushrooms, Spinach, Goat Cheese, Garlic, Balsamic Vinegar",
+      "preparedStatus": "Prepared",
+      "instruction": "Bake mushrooms stuffed with cheese and spinach."
     }
   ]
 }

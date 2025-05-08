@@ -1,40 +1,26 @@
+import React from "react";
 import {
-  Container,
   Nav,
-  Navbar,
   NavbarBrand,
   NavItem,
   NavLink,
+  Navbar as ReactstrapNavbar,
 } from "reactstrap";
-import AddMeal from "./Addmeal";
 
-const MyNavbar = () => {
+const Navbar: React.FC = () => {
   return (
-    <Navbar color="dark" dark expand="md">
-      <Container>
-        <NavbarBrand href="/">Meal Planner</NavbarBrand>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            <NavLink href="/">Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/meals">Meal List</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/search">Search & Filter</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              href="/add-meal"
-              element={<AddMeal fetchUpdatedMeals={() => {}} />}
-            >
-              Add Meal
-            </NavLink>
-          </NavItem>
-        </Nav>
-      </Container>
-    </Navbar>
+    <ReactstrapNavbar color="dark" dark expand="md" className="mb-4">
+      <NavbarBrand href="/">Meal Prep Planner</NavbarBrand>
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink href="/">Home</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/add-meal">Add Meal</NavLink>
+        </NavItem>
+      </Nav>
+    </ReactstrapNavbar>
   );
 };
 
-export default MyNavbar;
+export default Navbar;
