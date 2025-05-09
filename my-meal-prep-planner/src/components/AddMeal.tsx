@@ -70,7 +70,11 @@ const AddMeal: React.FC = () => {
           <Controller
             name="mealName"
             control={control}
-            rules={{ required: "Meal name is required" }}
+            rules={{
+              required: "Meal name is required",
+              minLength: 5,
+              maxLength: 25,
+            }}
             render={({ field }) => (
               <Input id="mealName" {...field} invalid={!!errors.mealName} />
             )}
@@ -112,7 +116,11 @@ const AddMeal: React.FC = () => {
           <Controller
             name="ingredients"
             control={control}
-            rules={{ required: "Ingredients are required" }}
+            rules={{
+              required: "Ingredients are required",
+              minLength: 5,
+              maxLength: 80,
+            }}
             render={({ field }) => (
               <Input
                 id="ingredients"
@@ -152,7 +160,11 @@ const AddMeal: React.FC = () => {
           <Controller
             name="instruction"
             control={control}
-            rules={{ required: "Instruction is required" }}
+            rules={{
+              required: "Instruction is required",
+              minLength: 10,
+              maxLength: 100,
+            }}
             render={({ field }) => (
               <Input
                 type="textarea"

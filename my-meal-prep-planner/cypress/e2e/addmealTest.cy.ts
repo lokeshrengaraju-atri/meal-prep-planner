@@ -10,12 +10,15 @@ describe("Add Item", () => {
     cy.url().should("include", "/add");
 
     // Enter values into the form fields
-    cy.get('input[name="mealName"]').type("name");
+    cy.get('input[name="mealName"]').type("Vegan Chickpea Curry");
     cy.get('select[name="dayOfWeek"]').select("Monday");
-    cy.get('input[name="ingredients"]').type("ingredients");
+    cy.get('input[name="ingredients"]').type(
+      "Chickpeas, Coconut Milk, Onion, Garlic, Curry Powder"
+    );
     cy.get('select[name="preparedStatus"]').select("Prepared");
-    // cy.get('input[name="preparedStatus"]').type("preparedStatus");
-    cy.get('textarea[name="instruction"]').type("instruction");
+    cy.get('textarea[name="instruction"]').type(
+      "Simmer chickpeas in coconut curry sauce."
+    );
 
     // Submit the form
     cy.get("button").contains("Add Meal").click();
@@ -27,11 +30,18 @@ describe("Add Item", () => {
       cy.get("table tbody tr")
         .last()
         .within(() => {
-          cy.get("td").eq(1).should("contain.text", "name");
+          cy.get("td").eq(1).should("contain.text", "Vegan Chickpea Curry");
           cy.get("td").eq(2).should("contain.text", "Monday");
-          cy.get("td").eq(3).should("contain.text", "ingredients");
+          cy.get("td")
+            .eq(3)
+            .should(
+              "contain.text",
+              "Chickpeas, Coconut Milk, Onion, Garlic, Curry Powder"
+            );
           cy.get("td").eq(4).should("contain.text", "Prepared");
-          cy.get("td").eq(5).should("contain.text", "instruction");
+          cy.get("td")
+            .eq(5)
+            .should("contain.text", "Simmer chickpeas in coconut curry sauce.");
         });
     };
 

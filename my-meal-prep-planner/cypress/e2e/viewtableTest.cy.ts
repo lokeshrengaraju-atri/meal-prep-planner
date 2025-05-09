@@ -10,7 +10,6 @@ describe("Main Page", () => {
     cy.get("table tbody tr").should("have.length.greaterThan", 0);
 
     // Check if everyrow in the column in filled
-
     cy.get("table tbody tr").each(($row) => {
       cy.wrap($row)
         .find("td")

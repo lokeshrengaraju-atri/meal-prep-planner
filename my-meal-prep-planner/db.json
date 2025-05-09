@@ -2,11 +2,11 @@
   "meals": [
     {
       "id": "1",
-      "mealName": "Scrambled Eggs & Toast",
-      "dayOfWeek": "Monday",
-      "ingredients": "Eggs, Bread, Butter, Salt",
-      "preparedStatus": "Not Prepared",
-      "instruction": "Whisk eggs, cook in a pan,  add salt and pepper"
+      "mealName": "Stuffed Portobello Mushrooms",
+      "dayOfWeek": "Wednesday",
+      "ingredients": "Portobello Mushrooms, Spinach, Goat Cheese, Garlic, Balsamic Vinegar",
+      "preparedStatus": "Prepared",
+      "instruction": "Bake mushrooms stuffed with cheese and spinach."
     },
     {
       "id": "2",
@@ -89,46 +89,6 @@
       "instruction": "Wrap crispy falafel with fresh veggies and hummus."
     },
     {
-      "id": "13",
-      "mealName": "Butter Chicken",
-      "dayOfWeek": "Saturday",
-      "ingredients": "Chicken, Tomato, Butter, Cream, Spices",
-      "preparedStatus": "Not Prepared",
-      "instruction": "Simmer chicken in tomato-butter sauce and serve with rice."
-    },
-    {
-      "id": "14",
-      "mealName": "Shrimp Tacos",
-      "dayOfWeek": "Sunday",
-      "ingredients": "Shrimp, Taco Shells, Cabbage, Lime, Avocado",
-      "preparedStatus": "Prepared",
-      "instruction": "Cook shrimp, assemble tacos with fresh toppings."
-    },
-    {
-      "id": "15",
-      "mealName": "Eggplant Parmesan",
-      "dayOfWeek": "Monday",
-      "ingredients": "Eggplant, Tomato Sauce, Mozzarella, Basil, Bread Crumbs",
-      "preparedStatus": "Not Prepared",
-      "instruction": "Layer eggplant with cheese and sauce, then bake."
-    },
-    {
-      "id": "16",
-      "mealName": "Korean Bibimbap",
-      "dayOfWeek": "Tuesday",
-      "ingredients": "Rice, Beef, Carrots, Spinach, Egg, Gochujang",
-      "preparedStatus": "Prepared",
-      "instruction": "Arrange ingredients over rice, top with egg and sauce."
-    },
-    {
-      "id": "17",
-      "mealName": "Falafel Wrap",
-      "dayOfWeek": "Wednesday",
-      "ingredients": "Falafel, Pita Bread, Hummus, Cucumber, Tomato",
-      "preparedStatus": "Not Prepared",
-      "instruction": "Wrap crispy falafel with fresh veggies and hummus."
-    },
-    {
       "id": "18",
       "mealName": "Vegetable Pad Thai",
       "dayOfWeek": "Thursday",
@@ -159,6 +119,38 @@
       "ingredients": "Portobello Mushrooms, Spinach, Goat Cheese, Garlic, Balsamic Vinegar",
       "preparedStatus": "Prepared",
       "instruction": "Bake mushrooms stuffed with cheese and spinach."
+    },
+    {
+      "id": "22",
+      "mealName": "Beef Stroganoff",
+      "dayOfWeek": "Friday",
+      "ingredients": "Beef, Mushrooms, Sour Cream, Noodles",
+      "preparedStatus": "Not Prepared",
+      "instruction": "Cook beef, add mushrooms, sour cream, and noodles"
+    },
+    {
+      "id": "23",
+      "mealName": "Chicken Tikka Masala",
+      "dayOfWeek": "Friday",
+      "ingredients": "Chicken, Tikka Masala Sauce, Rice",
+      "preparedStatus": "Prepared",
+      "instruction": "Cook chicken, add tikka masala sauce, serve with rice"
+    },
+    {
+      "id": "24",
+      "mealName": "Vegetable Pizza",
+      "dayOfWeek": "Friday",
+      "ingredients": "Pizza Dough, Tomato Sauce, Vegetables, Cheese",
+      "preparedStatus": "Prepared",
+      "instruction": "Prepare dough, add sauce, vegetables, and cheese, bake"
+    },
+    {
+      "id": "25",
+      "mealName": "Grilled Cheese Sandwich",
+      "dayOfWeek": "Wednesday",
+      "ingredients": "Bread, Cheese, Butter",
+      "preparedStatus": "Prepared",
+      "instruction": "Butter bread, add cheese, grill until golden"
     }
   ]
 }

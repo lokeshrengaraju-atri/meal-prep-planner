@@ -18,6 +18,9 @@ const Navbar: React.FC = () => {
         <NavItem>
           <NavLink href="/add-meal">Add Meal</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink href="/pie-chart">Chart</NavLink>
+        </NavItem>
       </Nav>
     </ReactstrapNavbar>
   );
